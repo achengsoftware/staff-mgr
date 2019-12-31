@@ -5,14 +5,14 @@ const Err = require('../utills/errinfo')
 
 /**
  * @api {post} /user/reg 用户注册
- * @apiName 用户注册
+ * @apiName reg
  * @apiGroup User
  *
  * @apiParam {Number} us 用户名
  * @apiParam {Number} ps 密码
  * @apiParam {Number} code 验证码
  *
- * @apiSuccess {String} err err为0
+ * @apiSuccess {String} err 0
  */
 router.post('/reg',(req,res) =>{
   let {us,ps} = req.body
