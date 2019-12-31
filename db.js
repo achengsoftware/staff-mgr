@@ -21,7 +21,7 @@ let userSchema = new mongoose.Schema({
 }) 
 
 //创建数据模型
-let user = mongoose.model('user',userSchema)
+let user = mongoose.model('users',userSchema)
 
 //插入数据库
 user.insertMany({
