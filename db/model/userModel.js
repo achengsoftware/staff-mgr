@@ -1,9 +1,11 @@
+const mongoose = require('mongoose')
+
 //创建Schema
 let userSchema = new mongoose.Schema({
   us  : {type:String,required:true},//姓名
-  ps  : {type:String,required:false},//密码
-  card: {type:String,required:true},//身份证号
-  hireDate:{type:String,required:true},//入职时间
+  ps  : {type:String,required:true},//密码
+  card: {type:String,required:false},//身份证号
+  hireDate:{type:String,required:false},//入职时间
   sex: {type:String,default:0},//性别
   level: Number,//等级
   phone: String,
