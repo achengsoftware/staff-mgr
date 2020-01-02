@@ -10,8 +10,11 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 const userRouter = require('./router/userRouter')
+const mailRouter = require('./router/mailRouter')
 app.use('/user',userRouter)
+app.use('/',mailRouter)
+
 
 app.listen(3000,() => {
-  console.log('server start ok.')
+  console.log(`server is running on port:${3000}.`)
 })

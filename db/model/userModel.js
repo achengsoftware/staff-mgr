@@ -6,12 +6,12 @@ let userSchema = new mongoose.Schema({
   ps  : {type:String,required:true},//密码
   card: {type:String,required:false},//身份证号
   hireDate:{type:String,required:false},//入职时间
-  sex: {type:String,default:0},//性别
-  level: Number,//等级
-  phone: String,
-  age: String,
-  email: String,
-  adress: String,
+  sex: {type:Number,default:0},//性别
+  level: {type:Number,default:1},//等级
+  phone: {type:String,default:''},
+  age: {type:Number,default:0},
+  email: {type:String,default:''},
+  adress: {type:String,default:''},
 }) 
 
 //创建数据模型
