@@ -22,22 +22,24 @@ router.post('/reg',(req,res) =>{
     //验证验证码是否有效
     MailCode.find({mail})
     .then( codeObj =>{
-      if(codeObj.length === 0)  return res.json({err:-5,msg:'无效的邮箱地址'})
-      if(codeObj[0].code !== code) return res.json({err:-6,msg:'验证码无效，请重试'})
-      if(Date.now() > (codeObj[0].ctime+codeObj[0].limit)) return res.json({err:-7,msg:'验证码过期，请重新获取验证码'})
-      User.find({us})
-      .then(data => {
-        if(data.length>0){
-          return res.json(Err.getErr(-4))
-        }else{
-          User.insertMany({us,ps,email:mail})
-          .then( data => {
-            res.json({ err : 0,msg:'reg ok.'
-            })
-          })
-          .catch( () => res.json(Err.getErr(-2)))
-        }
+      if(codeObj.length === 0)  throw new Error('无效的邮箱地址')
+      if(codeObj[0].code !== code) throw new Error('验证码无效，请重试')
+      if(Date.now() > (codeObj[0].ctime+codeObj[0].limit)) throw new Error('验证码过期，请重新获取验证码')
+      return  User.find({us})
+    })
+    .then(data => {
+      if(data.length>0){
+        throw new Error('用户名已经存在')
+      }else{
+        return  User.insertMany({us,ps,email:mail})
+      }
+    })
+    .then( data => {
+      res.json({ err : 0,msg:'reg ok.'
       })
+    })
+    .catch( errObj => {
+      res.json({msg:errObj.message})
     })
   }else{
     res.json(Err.getErr(-1))
